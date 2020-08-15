@@ -41,7 +41,7 @@ public class Lista<T> implements Listable<T> {
 
         public boolean equals(Nodo n) {
             // Comparamos los elementos
-            return n.elemento.equals(this.elemento);
+            return n.elemento == this.elemento;
         }
     }
 
@@ -191,6 +191,7 @@ public class Lista<T> implements Listable<T> {
         }
     }
 
+
     /**
      * Método para obtener el primer elemento.
      */
@@ -252,15 +253,11 @@ public class Lista<T> implements Listable<T> {
      */
     @Override
     public void eliminar(T elemento) throws NoSuchElementException {
-
-        if(elemento == null)
-            throw new NoSuchElementException("No se encontro el elemento");
-
         Nodo nodoElem = this.getNodo(elemento);
-        
+
         if (nodoElem == null)
             throw new NoSuchElementException("No se encontro el elemento");
-        
+
         if (nodoElem == this.cabeza) {
             this.eliminarPrimero();
             return;
@@ -283,16 +280,9 @@ public class Lista<T> implements Listable<T> {
     public void eliminarPrimero() throws NoSuchElementException {
         if (this.esVacia())
             throw new NoSuchElementException("La lista es vacia");
-
-        if(this.longitud == 1){
-            this.vaciar();
-            return;
-        }
-
         this.cabeza = this.cabeza.siguiente;
         this.cabeza.anterior = null;
         longitud--;
-        
     }
 
     /**
@@ -301,12 +291,6 @@ public class Lista<T> implements Listable<T> {
     public void eliminarUltimo() throws NoSuchElementException {
         if (this.esVacia())
             throw new NoSuchElementException("La lista es vacia");
-
-        if(this.longitud == 1){
-            this.vaciar();
-            return;
-        }
-
         this.cola = this.cola.anterior;
         this.cola.siguiente = null;
         longitud--;
