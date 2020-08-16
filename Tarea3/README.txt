@@ -14,6 +14,9 @@ Ejericio 4 -
 Creamos una nueva clase llamada ColaConPilas
 creamos dos pilas y un entero para la longitud
 
-*Queue agregamos a la pila auxiliar
-*Dequeue pasamos los elementos de la pila auxiliar a la pila general para poder manejarlos correctamente 
-obtenemos el elemento y lo regresamos 
+*Queue verificamos si la pila esvacia metemos directamente el elemento a la pilasi no es vacia
+entonces copiamos todos los elementos de la pila a la auxiliar, luego agregamos el elemento nuevo
+al fondo de la pila y finalmente regresamos los elementos de el aux a la pila original 
+esto hace que el nuevo elemento quede al final de la cola 
+
+*Dequeue funciona igual que en la implementacion original de colas 
