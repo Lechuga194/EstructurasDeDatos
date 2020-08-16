@@ -15,7 +15,7 @@ public class TestTarea3 {
 
 	public static void main(String[] args) {
 
-		// balanceoTest();
+		balanceoTest();
 		colaConPilaTest();
 
 	}
