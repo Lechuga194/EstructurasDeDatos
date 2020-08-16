@@ -23,7 +23,9 @@ public class Pila<T> extends Lista<T> implements Apilable<T> {
      * @param iterable El objeto que se recibe como parámetro.
      */
     public Pila(Iterable<T> iterable) {
-        //Aqui va tu codigo
+        for(T elemento: iterable){
+            this.push(elemento);
+        }
     }
 
     /**
@@ -31,7 +33,9 @@ public class Pila<T> extends Lista<T> implements Apilable<T> {
      * Crea una nueva Pila con los elementos de la estructura iterable que recibe como parámetro.
      */
     public Pila(Pila<T> p) {
-        //Aqui va tu codigo
+        for(T elemento: p){
+            this.push(elemento);
+        }
     }
 
     /**
@@ -41,8 +45,10 @@ public class Pila<T> extends Lista<T> implements Apilable<T> {
      * <code>null</code>.
      */
     @Override
-    public void push(T elemento) throws IllegalArgumentException{
-        //Aqui va tu codigo        
+    public void push(T elemento) throws IllegalArgumentException{ 
+        if(elemento == null)
+            throw new IllegalArgumentException("Elemento no valido");
+        super.agregar(elemento);
     }
 
     /**
@@ -52,7 +58,11 @@ public class Pila<T> extends Lista<T> implements Apilable<T> {
      */
     @Override
     public T pop() throws NoSuchElementException{
-        //Aqui va tu codigo
+        if(super.esVacia())
+            throw new NoSuchElementException("La pila es vacia");
+        T elemento = this.cabeza.elemento;
+        super.eliminarPrimero();
+        return elemento;
     }
 
     /**
@@ -62,7 +72,9 @@ public class Pila<T> extends Lista<T> implements Apilable<T> {
      */
     @Override
     public T top() throws NoSuchElementException{
-        //Aqui va tu codigo
+        if(super.esVacia())
+            throw new NoSuchElementException("La pila es vacia");
+        return this.cabeza.elemento;
     }
     
     /**

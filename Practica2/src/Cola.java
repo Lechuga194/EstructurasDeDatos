@@ -25,7 +25,9 @@ public class Cola<T> extends Lista<T> implements Encolable<T> {
      * @param iterable El objeto que se recibe como parámetro.
      */
     public Cola(Iterable<T> iterable) {
-        //Aqui va tu codigo
+        for(T elemento: iterable){
+            this.queue(elemento);
+        }
     }
 
     /**
@@ -33,7 +35,9 @@ public class Cola<T> extends Lista<T> implements Encolable<T> {
      * Crea una nueva cola con los elementos de la estructura iterable que recibe como parámetro.
      */
     public Cola(Cola<T> c) {
-        //Aqui va tu codigo
+        for(T elemento: c){
+            this.queue(elemento);
+        }
     }
 
 
@@ -46,7 +50,9 @@ public class Cola<T> extends Lista<T> implements Encolable<T> {
      */
     @Override
     public void queue(T elemento) throws IllegalArgumentException{
-        //Aqui va tu codigo        
+        if(elemento == null)
+            throw new IllegalArgumentException("Elemento no valido");
+        super.agregarAlFinal(elemento);
     }
 
     /**
@@ -56,7 +62,11 @@ public class Cola<T> extends Lista<T> implements Encolable<T> {
      */
     @Override
     public T dequeue() throws NoSuchElementException{
-        //Aqui va tu codigo
+        if(super.esVacia())
+            throw new NoSuchElementException("La cola es vacia");
+        T elemento = super.getPrimero();
+        super.eliminarPrimero();
+        return elemento;
     }
 
     /**
@@ -66,7 +76,9 @@ public class Cola<T> extends Lista<T> implements Encolable<T> {
      */
     @Override
     public T peek() throws NoSuchElementException{
-        //Aqui va tu codigo
+        if(super.esVacia())
+            throw new NoSuchElementException("La cola es vacia");
+        return this.cabeza.elemento;
     }
     
     /**
