@@ -27,6 +27,6 @@ public class Balanceo {
             }
             
         }   
-        return true;
+        return pila.esVacia();
     }
 }

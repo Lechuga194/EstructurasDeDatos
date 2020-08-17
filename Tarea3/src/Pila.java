@@ -33,7 +33,12 @@ public class Pila<T> extends Lista<T> implements Apilable<T> {
      * Crea una nueva Pila con los elementos de la estructura iterable que recibe como parámetro.
      */
     public Pila(Pila<T> p) {
+        //Para que agregue los elementos de forma correcta nos apoyamos de una pila auxiliar
+        Pila<T> aux = new Pila();
         for(T elemento: p){
+            aux.push(elemento);
+        }
+        for(T elemento: aux){
             this.push(elemento);
         }
     }

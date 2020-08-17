@@ -15,7 +15,7 @@ public class TestTarea3 {
 
 	public static void main(String[] args) {
 
-		// balanceoTest();
+		balanceoTest();
 		colaConPilaTest();
 
 		
@@ -24,14 +24,20 @@ public class TestTarea3 {
 
 	public static void balanceoTest(){
 		System.out.println("----------------------------------Balanceo de expresiones------------------------------------------------------");
-		boolean test1 = Balanceo.verificaBalanceo("((((asdasdasd(())))))( )()(())()()()   ( v   )(((())))()()()()"); //true
-		boolean test2 = Balanceo.verificaBalanceo("hola"); //true
-		boolean test3 = Balanceo.verificaBalanceo("())"); //false
-		boolean test4 = Balanceo.verificaBalanceo(""); //true
-		System.out.println(test1);
-		System.out.println(test2);
-		System.out.println(test3);
-		System.out.println(test4);
+		
+		String test = "((((asdasdasd(())))))(((())))()()()()";
+		System.out.println( test + " esta balanceado? " + Balanceo.verificaBalanceo(test)); //TRUE
+
+		test = "Hola!";
+		System.out.println( test + " esta balanceado? " + Balanceo.verificaBalanceo(test)); //TRUE
+
+		test = "((";
+		System.out.println( test + " esta balanceado? " + Balanceo.verificaBalanceo(test)); //FALSE
+
+		test = "(()))";
+		System.out.println( test + " esta balanceado? " + Balanceo.verificaBalanceo(test)); //FALSE
+
+		System.out.println("Vacio esta balanceado? " + Balanceo.verificaBalanceo("")); //FALSE
 	}
 
 	public static void colaConPilaTest(){
@@ -49,12 +55,16 @@ public class TestTarea3 {
 		a.queue(1);
 		System.out.println("Longitud: " + a.longitud);
 		
+		System.out.println("Sacamos elementos");
 		int e = (int)a.dequeue();
 		System.out.println(e);
 		e = (int)a.dequeue();
 		System.out.println(e);
 
+		System.out.println("Agregamos elementos");
 		a.queue(4);
+		a.queue(12);
+		a.queue(6);
 		System.out.println("Longitud: " + a.longitud);
 
 		System.out.println(a);
