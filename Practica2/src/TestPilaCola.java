@@ -13,7 +13,7 @@ public class TestPilaCola {
 		System.out.println("----------------------------------PILAS------------------------------------------------------");
 
 		System.out.println("Constructor iterable");
-		Integer[] conjunto = { 3, 2, 1, 4, 5 };
+		Integer[] conjunto = { 1,2,3,4,5 };
 		Iterable<Integer> c = Arrays.asList(conjunto);
 		Lista<Iterable<Integer>> pilaIterable = new Pila(c);
 		System.out.println(pilaIterable);
@@ -54,7 +54,7 @@ public class TestPilaCola {
 		System.out.println("----------------------------------COLAS------------------------------------------------------");
 
 		System.out.println("Constructor iterable");
-		Integer[] conjuntoy = { 3, 2, 1, 4, 5 };
+		Integer[] conjuntoy = { 1,2,3,4,5 };
 		Iterable<Integer> yy = Arrays.asList(conjuntoy);
 		Cola<Iterable<Integer>> colaIterable = new Cola(yy);
 		System.out.println(colaIterable);
@@ -75,9 +75,9 @@ public class TestPilaCola {
 		System.out.println(b);
 
 		System.out.println("Agregamos elementos");
-		b.queue(2);
-		b.queue(8);
 		b.queue(1);
+		b.queue(2);
+		b.queue(3);
 		System.out.println("Longitud: " + b.longitud);
 		System.out.println(b);
 

@@ -1,4 +1,7 @@
 Para ejecutar el codigo
-1.- Abrir una terminal y estar en el directorio donde se encuentra build.xml
-2.- Ejecutar ant run
-3.- Introducir los datos que se pidan 
+1.- Abrir una terminal dentro de la carpeta src
+2.- Ejecutar "javac *.java"
+3.- Ejecutar  "java TestPilaCola"
+
+PILA
+*Constructor que recibe una pila usa una auxiliar para agregar los elementos en orden

@@ -21,7 +21,7 @@ public class TestTarea3 {
 	}
 
 	public static void balanceoTest(){
-		System.out.println("----------------------------------Balanceo de expresiones------------------------------------------------------");
+		System.out.println("------------------------Balanceo de expresiones-------------------------------------");
 		
 		String test = "((((asdasdasd(())))))(((())))()()()()";
 		System.out.println( test + " esta balanceado? " + Balanceo.verificaBalanceo(test)); //TRUE
@@ -39,44 +39,58 @@ public class TestTarea3 {
 	}
 
 	public static void colaConPilaTest() {
-		System.out.println(
-				"----------------------------------Cola con pilas------------------------------------------------------");
+		System.out.println("----------------------------------Cola con pilas---------------------------------------");
 
 		System.out.println("Creamos la cola");
 		ColaConPila a = new ColaConPila();
 		System.out.println(a.longitud);
-		System.out.println(a);
 
-		System.out.println("Agregamos elementos");
+		System.out.println("Agregamos elementos [1,2,3,4,5,6]");
 		a.queue(1);
 		a.queue(2);
 		a.queue(3);
 		a.queue(4);
-		a.queue(12);
+		a.queue(5);
 		a.queue(6);
+
 		System.out.println("Longitud: " + a.longitud);
 
-		int deberiaser1 = (int) a.dequeue();
-		System.out.println(deberiaser1);
+		System.out.println("Hacemos dequeue 1");
+		int elemento = (int) a.dequeue();
+		System.out.println(elemento);
 
-		a.queue(5);
+		System.out.println("Agregamos elementos [2,3,4,5,6,7,8]");
+		a.queue(7);
+		a.queue(8);
 
-		int deberiaser2 = (int) a.dequeue();
-		System.out.println(deberiaser2);
+		System.out.println("Hacemos dequeue 2");
+		elemento = (int) a.dequeue();
+		System.out.println(elemento + " fue retirado");
 
-		int deberiaser3 = (int) a.dequeue();
-		System.out.println(deberiaser3);
+		System.out.println("Hacemos dequeue 3");
+		elemento = (int) a.dequeue();
+		System.out.println(elemento + " fue retirado");
 
-		int deberiaser4 = (int) a.dequeue();
-		System.out.println(deberiaser4);
+		System.out.println("Hacemos dequeue 4");
+		elemento = (int) a.dequeue();
+		System.out.println(elemento + " fue retirado");
 
-		int deberiaser5 = (int) a.dequeue();
-		System.out.println(deberiaser5);
+		System.out.println("Hacemos dequeue 5");
+		elemento = (int) a.dequeue();
+		System.out.println(elemento + " fue retirado");
 
-		a.queue(6);
+		System.out.println("Agregamos elementos [6,7,8,9,10]");
+		a.queue(9);
+		a.queue(10);
 
-		int deberiaser6 = (int) a.dequeue();
-		System.out.println(deberiaser6);
+		System.out.println("Hacemos dequeue 6 ");
+		elemento = (int) a.dequeue();
+		System.out.println(elemento + " fue retirado");
+
+		System.out.println("Scamos los restantes [7,8,9,10]");
+		while(a.longitud > 0){
+			System.out.println(a.dequeue());
+		}
 
 	}
 }
