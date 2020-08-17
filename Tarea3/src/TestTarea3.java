@@ -18,8 +18,6 @@ public class TestTarea3 {
 		balanceoTest();
 		colaConPilaTest();
 
-		
-
 	}
 
 	public static void balanceoTest(){
@@ -40,35 +38,45 @@ public class TestTarea3 {
 		System.out.println("Vacio esta balanceado? " + Balanceo.verificaBalanceo("")); //FALSE
 	}
 
-	public static void colaConPilaTest(){
-		System.out.println("----------------------------------Cola con pilas------------------------------------------------------");
+	public static void colaConPilaTest() {
+		System.out.println(
+				"----------------------------------Cola con pilas------------------------------------------------------");
 
 		System.out.println("Creamos la cola");
 		ColaConPila a = new ColaConPila();
 		System.out.println(a.longitud);
 		System.out.println(a);
-		
-		System.out.println("Agregamos elementos");
-		a.queue(3);
-		a.queue(7);
-		a.queue(5);
-		a.queue(1);
-		System.out.println("Longitud: " + a.longitud);
-		
-		System.out.println("Sacamos elementos");
-		int e = (int)a.dequeue();
-		System.out.println(e);
-		e = (int)a.dequeue();
-		System.out.println(e);
 
 		System.out.println("Agregamos elementos");
+		a.queue(1);
+		a.queue(2);
+		a.queue(3);
 		a.queue(4);
 		a.queue(12);
 		a.queue(6);
 		System.out.println("Longitud: " + a.longitud);
 
-		System.out.println(a);
-		System.out.println("Longitud: " + a.longitud);
+		int deberiaser1 = (int) a.dequeue();
+		System.out.println(deberiaser1);
+
+		a.queue(5);
+
+		int deberiaser2 = (int) a.dequeue();
+		System.out.println(deberiaser2);
+
+		int deberiaser3 = (int) a.dequeue();
+		System.out.println(deberiaser3);
+
+		int deberiaser4 = (int) a.dequeue();
+		System.out.println(deberiaser4);
+
+		int deberiaser5 = (int) a.dequeue();
+		System.out.println(deberiaser5);
+
+		a.queue(6);
+
+		int deberiaser6 = (int) a.dequeue();
+		System.out.println(deberiaser6);
 
 	}
 }
