@@ -133,7 +133,7 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @param iterable
      */
     public ArbolBinario(Iterable<T> iterable) {
-        // TODO
+        // Aquí va tu código
     }
 
     /**
@@ -238,7 +238,6 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @return Cola con los elementos del arbol.
      */
     public Lista<T> preOrden() {
-        // Aquí va tu código
         return null;
     }
 
@@ -248,7 +247,6 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @return Cola con los elementos del arbol.
      */
     public Lista<T> postOrden() {
-        // Aquí va tu código
         return null;
     }
 

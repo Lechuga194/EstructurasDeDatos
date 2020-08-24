@@ -70,23 +70,27 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      *
      **/
     protected void agregaNodo(Nodo n, Nodo nuevo) {
-        if (this.esVacia())
-            this.raiz = nuevo;
 
-        if (nuevo.elemento.compareTo(this.raiz.elemento) < 0) {
-            // if (n.hayIzquierdo()) {
-            // agregaNodo(n.izquierdo, nuevo);
-            // n.izquierdo = nuevo;
-            // }
-            this.raiz.izquierdo = nuevo;
+        if (this.esVacia()) {
+            this.raiz = nuevo;
+            this.tamanio++;
+            return;
         }
 
-        if (nuevo.elemento.compareTo(this.raiz.elemento) >= 0) {
+        if (nuevo.elemento.compareTo(n.elemento) < 0) {
             // if (n.hayIzquierdo()) {
             // agregaNodo(n.izquierdo, nuevo);
             // n.izquierdo = nuevo;
             // }
-            this.raiz.derecho = nuevo;
+            n.izquierdo = nuevo;
+        }
+
+        if (nuevo.elemento.compareTo(n.elemento) >= 0) {
+            // if (n.hayIzquierdo()) {
+            // agregaNodo(n.izquierdo, nuevo);
+            // n.izquierdo = nuevo;
+            // }
+            n.derecho = nuevo;
         }
 
         this.tamanio++;
