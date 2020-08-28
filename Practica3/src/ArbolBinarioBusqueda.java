@@ -128,8 +128,35 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * Método auxiliar que elimina el nodo n. Notemos que en este punto ya tenemos
      * una referencia al nodo que queremos eliminar.
      **/
-    protected Nodo eliminaNodo(Nodo n) {
-        // TODO eliminar
+
+    /*
+     * Si el nodo que vamos a eliminar tiene alguno de sus hijos nulos, entonces el
+     * hijo no nulo pasa a ser nuevo hijo del padre del nodo eliminado. Si el nodo
+     * tiene ambos hijos, hay que buscar el nodo que tenga el máximo elemento sobre
+     * el hijo izquierdo del nodo que vamos a eliminar. Hacemos el intercambio de
+     * elementos y eliminamos el máximo. Ese nodo máximo cae en el caso anterior.
+     */
+
+    /*
+     * 3.3. Eliminar un elemento del Arbol ́ Antes de eliminar un elemento del
+     * ́arbol, necesitamos obtener el nodo en d ́onde se encuentra el elemento. Una
+     * vez que lo tenemos hacemos lo siguiente: Si el nodo es una hoja (es decir que
+     * no tiene ning ́un hijo), podemos quitar ese nodo. Si el nodo no tiene hijo
+     * izquierdo, el padre del nodo se vuelve padre del hijo derecho del nodo. Si el
+     * nodo tiene hijo izquierdo, buscamos al nodo que tenga el m ́aximo elemento
+     * del sub ́arbol izquierdo, e intercambiamos los elementos de ambos nodos.
+     * Podemos notar que ahora el nodo que tiene el elemento que queremos eliminar
+     * cae en uno de los casos anteriormente explicados*
+     * 
+     * . Por lo tanto procedemos a eliminarlo de la estructura, debemos subir a su
+     * hijo izquierdo, para no perder los descendientes de ́este al hacer el cambio
+     * de referencias. Debemos tener cuidado en el caso en que el nodo a eliminar es
+     * la ra ́ız del ́arbol. Observaci ́on. Cada que movamos referencias de uno de
+     * los padres, hayq que verificar que tambi ́en movamos la referencias de los
+     * hijos, si no el ́arbol va a quedar mal construido.
+     */
+
+    protected Nodo eliminaNodo(Nodo n) { // TODO eliminar
         return null;
     }
 
