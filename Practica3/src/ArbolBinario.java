@@ -76,7 +76,23 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
          * @return la altura del nodo.
          */
         public int altura() {
-            return 1; // TODO Creo que es 1, but no c
+            return calculaAltura(this);
+        }
+
+        /**
+         * Metodo auxiliar para calcular la altura del arbol
+         * 
+         * @param nodo nodo a partir del cual se calcula la altura
+         * @return la altura del subarbol
+         */
+        private int calculaAltura(Nodo nodo) {
+            if (nodo == null)
+                return 0;
+
+            int subIzq = 1 + calculaAltura(nodo.izquierdo);
+            int subDer = 1 + calculaAltura(nodo.derecho);
+
+            return Math.max(subIzq, subDer);
         }
 
         /**
@@ -133,7 +149,9 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @param iterable
      */
     public ArbolBinario(Iterable<T> iterable) {
-        // Aquí va tu código
+        for (T item : iterable) {
+            this.agregar(item);
+        }
     }
 
     /**
@@ -219,17 +237,13 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @param cola donde se guardaran los elementos
      */
     private void inOrdenAux(Nodo izq, Nodo raiz, Nodo der, Cola<T> cola) {
-        if (raiz.hayIzquierdo()) {
+        if (raiz.hayIzquierdo())
             inOrdenAux(izq.izquierdo, izq, izq.derecho, cola);
-            cola.queue(izq.elemento);
-        }
 
         cola.queue(raiz.elemento);
 
-        if (raiz.hayDerecho()) {
+        if (raiz.hayDerecho())
             inOrdenAux(der.izquierdo, der, der.derecho, cola);
-            cola.queue(der.elemento);
-        }
     }
 
     /**
@@ -238,7 +252,27 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @return Cola con los elementos del arbol.
      */
     public Lista<T> preOrden() {
-        return null;
+        Cola<T> cola = new Cola<T>();
+        this.preOrderAux(this.raiz, this.raiz.izquierdo, this.raiz.derecho, cola);
+        return cola;
+    }
+
+    /**
+     * Metodo auxiliar para hacer el recorrido preOrder
+     * 
+     * @param raiz nodo de la raiz
+     * @param izq  nodo izquierdo de la raiz
+     * @param der  nodo der de la raiz
+     * @param cola donde se guardaran los elementos
+     */
+    private void preOrderAux(Nodo raiz, Nodo izq, Nodo der, Cola<T> cola) {
+        cola.queue(raiz.elemento);
+
+        if (raiz.hayIzquierdo())
+            preOrderAux(izq, izq.izquierdo, izq.derecho, cola);
+
+        if (raiz.hayDerecho())
+            preOrderAux(der, der.izquierdo, der.derecho, cola);
     }
 
     /**
@@ -247,7 +281,27 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
      * @return Cola con los elementos del arbol.
      */
     public Lista<T> postOrden() {
-        return null;
+        Cola<T> cola = new Cola<T>();
+        this.postOrdenAux(this.raiz.izquierdo, this.raiz.derecho, this.raiz, cola);
+        return cola;
+    }
+
+    /**
+     * Metodo auxiliar para hacer el recorrido postOrden
+     * 
+     * @param izq  nodo izquierdo de la raiz
+     * @param der  nodo der de la raiz
+     * @param raiz nodo de la raiz
+     * @param cola donde se guardaran los elementos
+     */
+    private void postOrdenAux(Nodo izq, Nodo der, Nodo raiz, Cola<T> cola) {
+        if (raiz.hayIzquierdo())
+            postOrdenAux(izq.izquierdo, izq.derecho, izq, cola);
+
+        if (raiz.hayDerecho())
+            postOrdenAux(der.izquierdo, der.derecho, der, cola);
+
+        cola.queue(raiz.elemento);
     }
 
     /**
@@ -265,7 +319,15 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
         @SuppressWarnings("unchecked")
         ArbolBinario<T> arbol = (ArbolBinario<T>) o;
 
-        return true;
+        if (this.tamanio != arbol.tamanio || !this.raiz.equals(arbol.raiz))
+            return false;
+
+        Lista<T> inOrder = this.inOrden();
+        Lista<T> aComparar = arbol.inOrden();
+
+        return inOrder.equals(aComparar);
+        // TODO equals
+
     }
 
     /**

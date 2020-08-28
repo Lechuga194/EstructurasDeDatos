@@ -1,4 +1,7 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import org.w3c.dom.ElementTraversal;
 
 /**
  * <p>
@@ -27,22 +30,32 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
 
         /* Construye un iterador con el nodo recibido. */
         public Iterador() {
-            // TODO
-
+            if (raiz == null)
+                throw new IllegalArgumentException("La raiz es nula!");
+            pila = new Pila<>();
+            pila.push(raiz);
+            while (pila.top().izquierdo != null) {
+                pila.push(pila.top().izquierdo);
+            }
         }
 
         /* Nos dice si hay un elemento siguiente. */
         @Override
         public boolean hasNext() {
-            // Aquí va su código.
-            return false;
+            return !pila.esVacia();
         }
 
         /* Regresa el siguiente elemento en orden DFS in-order. */
         @Override
         public T next() {
-            // Aquí va tu código
-            return null;
+            Nodo topePila = pila.pop();
+            if (topePila.derecho != null) {
+                pila.push(topePila.derecho);
+                while (pila.top().izquierdo != null) {
+                    pila.push(pila.top().izquierdo);
+                }
+            }
+            return topePila.elemento;
         }
     }
 
@@ -69,31 +82,35 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * Comienza las comparaciones desde el nodo n.
      *
      **/
-    protected void agregaNodo(Nodo n, Nodo nuevo) {
+    protected void agregaNodo(Nodo n, Nodo nuevo) throws IllegalArgumentException {
 
+        if (nuevo.elemento == null)
+            throw new IllegalArgumentException("No puedes insertar nulos!");
         if (this.esVacia()) {
             this.raiz = nuevo;
             this.tamanio++;
             return;
         }
-
         if (nuevo.elemento.compareTo(n.elemento) < 0) {
-            // if (n.hayIzquierdo()) {
-            // agregaNodo(n.izquierdo, nuevo);
-            // n.izquierdo = nuevo;
-            // }
-            n.izquierdo = nuevo;
+            if (n.hayIzquierdo())
+                agregaNodo(n.izquierdo, nuevo);
+            else {
+                nuevo.padre = n;
+                n.izquierdo = nuevo;
+                this.tamanio++;
+            }
         }
 
         if (nuevo.elemento.compareTo(n.elemento) >= 0) {
-            // if (n.hayIzquierdo()) {
-            // agregaNodo(n.izquierdo, nuevo);
-            // n.izquierdo = nuevo;
-            // }
-            n.derecho = nuevo;
+            if (n.hayDerecho())
+                agregaNodo(n.derecho, nuevo);
+            else {
+                nuevo.padre = n;
+                n.derecho = nuevo;
+                this.tamanio++;
+            }
         }
 
-        this.tamanio++;
     }
 
     /**
@@ -112,7 +129,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * una referencia al nodo que queremos eliminar.
      **/
     protected Nodo eliminaNodo(Nodo n) {
-        // Aquí va tu código
+        // TODO eliminar
         return null;
     }
 
@@ -130,11 +147,17 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
     }
 
     /**
-     * Método que encuentra el elemento máximo en el subárbol izquierdo
+     * Método que encuentra el elemento máximo en el subárbol izquierdo En caso de
+     * que no exista subarbol izquierdo regresa null
      **/
     private Nodo maximoEnSubarbolIzquierdo(Nodo n) {
-        // Aquí va tu código
-        return null;
+        if (!n.hayIzquierdo())
+            return null;
+
+        Nodo maximo = n.izquierdo;
+        while (maximo.hayDerecho())
+            maximo = maximo.derecho;
+        return maximo;
     }
 
     /**
@@ -154,8 +177,18 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * Método que busca un a elemento en el árbol desde el nodo n
      **/
     protected Nodo buscaNodo(Nodo n, T elemento) {
-        // Aquí va tu código
-        return null;
+
+        if (n == null || elemento == null)
+            return null;
+
+        if (elemento.equals(n.elemento))
+            return n;
+
+        if (elemento.compareTo(n.elemento) < 0)
+            return buscaNodo(n.izquierdo, elemento);
+
+        return buscaNodo(n.derecho, elemento);
+
     }
 
     /**
@@ -165,7 +198,32 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @param nodo el nodo sobre el que vamos a rotar.
      */
     protected void rotacionDerecha(Nodo nodo) {
-        // Aquí va tu código
+
+        if (!nodo.hayIzquierdo())
+            return;
+
+        Nodo padre = nodo.padre; // q.padre
+        Nodo p = nodo.izquierdo; // q.izquierdo
+        Nodo beta = (p.hayDerecho()) ? p.derecho : null;
+
+        if (nodo.equals(this.raiz)) {
+            nodo.padre = p;
+            raiz = p;
+        }
+
+        if (esHijoDerecho(nodo))
+            padre.derecho = p;
+
+        if (esHijoIzquierdo(nodo))
+            padre.izquierdo = p;
+
+        p.padre = padre;
+        p.derecho = nodo;
+        nodo.padre = p;
+        if (beta != null) {
+            beta.padre = nodo;
+            nodo.izquierdo = beta;
+        }
     }
 
     /**
@@ -175,7 +233,65 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @param nodo el nodo sobre el que vamos a rotar.
      */
     protected void rotacionIzquierda(Nodo nodo) {
-        // Aquí va tu código
+        if (!nodo.hayDerecho())
+            return;
+
+        Nodo padre = nodo.padre; // q.padre
+        Nodo p = nodo.derecho; // q.izquierdo
+        Nodo beta = (p.hayIzquierdo()) ? p.izquierdo : null;
+
+        if (nodo.equals(this.raiz)) {
+            nodo.padre = p;
+            raiz = p;
+        }
+
+        if (esHijoDerecho(nodo))
+            padre.derecho = p;
+
+        if (esHijoIzquierdo(nodo))
+            padre.izquierdo = p;
+
+        p.padre = padre;
+        p.izquierdo = nodo;
+        nodo.padre = p;
+        if (beta != null) {
+            beta.padre = nodo;
+            nodo.derecho = beta;
+        }
+    }
+
+    public void pruebaRotacionIzquierda(T elemento) {
+        Nodo nodo = this.buscaNodo(raiz, elemento);
+        this.rotacionIzquierda(nodo);
+    }
+
+    public void pruebaRotacionDerecha(T elemento) {
+        Nodo nodo = this.buscaNodo(raiz, elemento);
+        this.rotacionDerecha(nodo);
+    }
+
+    /**
+     * Metodo para saber si un nodo es hijo derecho de su padre
+     * 
+     * @param nodo el nodo a comprobar
+     * @return si es hijo derecho true, false en otro caso
+     */
+    private boolean esHijoDerecho(Nodo nodo) {
+        if (nodo.padre.derecho == null || nodo == null)
+            return false;
+        return nodo.padre.derecho.equals(nodo);
+    }
+
+    /**
+     * Metodo para saber si un nodo es hijo izquierdo de su padre
+     * 
+     * @param nodo el nodo a comprobar
+     * @return si es hijo derecho true, false en otro caso
+     */
+    private boolean esHijoIzquierdo(Nodo nodo) {
+        if (nodo.padre.izquierdo == null || nodo == null)
+            return false;
+        return nodo.padre.izquierdo.equals(nodo);
     }
 
     /**
