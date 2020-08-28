@@ -7,6 +7,65 @@ import java.util.NoSuchElementException;
  */
 public class PruebaArbolOrdenado {
 
+    public static void main(String[] args) {
+
+        double calificacion = 0;
+
+        // calificacion += pruebaAgregar();
+        // calificacion += pruebaEliminar();
+        // calificacion += pruebaContiene();
+        // calificacion += pruebaIterador();
+        // calificacion += pruebaConstructorIterable();
+        // calificacion += pruebaEsVacia();
+        // calificacion += pruebaGetTamanio();
+        // calificacion += pruebaVaciar();
+        // calificacion += pruebaEquals();
+        // calificacion += pruebaInOrden();
+        // calificacion += pruebaPreOrden();
+        // calificacion += pruebaPostOrden();
+        // calificacion += pruebaPostOrden();
+        // calificacion += pruebaRotacionDerecha();
+        // calificacion += pruebaRotacionIzquierda();
+
+        // System.out.println("Calificacion: " + calificacion);
+
+        ArbolBinarioBusqueda<Integer> a = new ArbolBinarioBusqueda<>();
+        a.agregar(5);
+        a.agregar(2);
+        a.agregar(1);
+        a.agregar(3);
+        a.agregar(4);
+        a.agregar(9);
+        a.agregar(6);
+        a.agregar(8);
+        a.agregar(7);
+        a.agregar(12);
+
+        // Eliminacion en hojas
+        a.eliminar(7);
+        a.eliminar(12);
+
+        a.agregar(7);
+        a.agregar(12);
+
+        // Eliminacion cuando el nodo no es hoja y no tiene hijo izquierdo
+        a.eliminar(6);
+        a.eliminar(3);
+        a.eliminar(4);
+        a.eliminar(7);
+        a.eliminar(8);
+        a.eliminar(12);
+
+        a.agregar(6);
+        a.agregar(3);
+        a.agregar(4);
+        a.agregar(8);
+        a.agregar(7);
+        a.agregar(12);
+        System.out.println(a);
+
+    }
+
     /**
      *
      * @return
@@ -785,27 +844,4 @@ public class PruebaArbolOrdenado {
         }
     }
 
-    public static void main(String[] args) {
-
-        double calificacion = 0;
-
-        calificacion += pruebaAgregar();
-        // calificacion += pruebaEliminar();
-        calificacion += pruebaContiene();
-        calificacion += pruebaIterador();
-        calificacion += pruebaConstructorIterable();
-        // calificacion += pruebaEsVacia();
-        // calificacion += pruebaGetTamanio();
-        // calificacion += pruebaVaciar();
-        // calificacion += pruebaEquals();
-        calificacion += pruebaInOrden();
-        calificacion += pruebaPreOrden();
-        calificacion += pruebaPostOrden();
-        calificacion += pruebaPostOrden();
-        calificacion += pruebaRotacionDerecha();
-        calificacion += pruebaRotacionIzquierda();
-
-        System.out.println("Calificacion: " + calificacion);
-
-    }
 }

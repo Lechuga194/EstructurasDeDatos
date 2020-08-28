@@ -130,6 +130,25 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      **/
 
     /*
+     * 3.3. Eliminar un elemento del Arbol antes de eliminar un elemento del arbol,
+     * necesitamos obtener el nodo en donde se encuentra el elemento. Una vez que lo
+     * tenemos hacemos lo siguiente: Si el nodo es una hoja (es decir que no tiene
+     * ningun hijo), podemos quitar ese nodo. Si el nodo no tiene hijo izquierdo, el
+     * padre del nodo se vuelve padre del hijo derecho del nodo. Si el nodo tiene
+     * hijo izquierdo, buscamos al nodo que tenga el maximo elemento del sub abol
+     * izquierdo, e intercambiamos los elementos de ambos nodos. Podemos notar que
+     * ahora el nodo que tiene el elemento que queremos eliminar cae en uno de los
+     * casos anteriormente explicados
+     * 
+     * . Por lo tanto procedemos a eliminarlo de la estructura, debemos subir a su
+     * hijo izquierdo, para no perder los descendientes de este al hacer el cambio
+     * de referencias. Debemos tener cuidado en el caso en que el nodo a eliminar es
+     * la raiz del arbol. Observaci on. Cada que movamos referencias de uno de los
+     * padres, hayq que verificar que tambien movamos la referencias de los hijos,
+     * si no el arbol va a quedar mal construido.
+     */
+
+    /*
      * Si el nodo que vamos a eliminar tiene alguno de sus hijos nulos, entonces el
      * hijo no nulo pasa a ser nuevo hijo del padre del nodo eliminado. Si el nodo
      * tiene ambos hijos, hay que buscar el nodo que tenga el máximo elemento sobre
@@ -137,26 +156,32 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * elementos y eliminamos el máximo. Ese nodo máximo cae en el caso anterior.
      */
 
-    /*
-     * 3.3. Eliminar un elemento del Arbol ́ Antes de eliminar un elemento del
-     * ́arbol, necesitamos obtener el nodo en d ́onde se encuentra el elemento. Una
-     * vez que lo tenemos hacemos lo siguiente: Si el nodo es una hoja (es decir que
-     * no tiene ning ́un hijo), podemos quitar ese nodo. Si el nodo no tiene hijo
-     * izquierdo, el padre del nodo se vuelve padre del hijo derecho del nodo. Si el
-     * nodo tiene hijo izquierdo, buscamos al nodo que tenga el m ́aximo elemento
-     * del sub ́arbol izquierdo, e intercambiamos los elementos de ambos nodos.
-     * Podemos notar que ahora el nodo que tiene el elemento que queremos eliminar
-     * cae en uno de los casos anteriormente explicados*
-     * 
-     * . Por lo tanto procedemos a eliminarlo de la estructura, debemos subir a su
-     * hijo izquierdo, para no perder los descendientes de ́este al hacer el cambio
-     * de referencias. Debemos tener cuidado en el caso en que el nodo a eliminar es
-     * la ra ́ız del ́arbol. Observaci ́on. Cada que movamos referencias de uno de
-     * los padres, hayq que verificar que tambi ́en movamos la referencias de los
-     * hijos, si no el ́arbol va a quedar mal construido.
-     */
-
     protected Nodo eliminaNodo(Nodo n) { // TODO eliminar
+
+        // Caso para Hojas
+        if (!n.hayIzquierdo() && !n.hayDerecho()) {
+            if (this.esHijoIzquierdo(n))
+                n.padre.izquierdo = null;
+            else
+                n.padre.derecho = null;
+            n.padre = null;
+            this.tamanio--;
+            return null;
+        }
+
+        // Caso para cuando el nodo n no tiene hijo izquierdo
+        if (!n.hayIzquierdo()) {
+            if (this.esHijoIzquierdo(n))
+                n.padre.izquierdo = n.derecho; // Sabemos que hay derecho por que no es hoja y no hay izquierdo
+            else
+                n.padre.derecho = n.derecho;
+            n.derecho.padre = n.padre;
+            n.derecho = null;
+            n.padre = null;
+            this.tamanio--;
+            return null;
+        }
+
         return null;
     }
 
