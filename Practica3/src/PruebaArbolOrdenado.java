@@ -64,6 +64,26 @@ public class PruebaArbolOrdenado {
         a.agregar(12);
         System.out.println(a);
 
+        // ELiminacion cuando el nodo no es hoja y si tiene hijo izquierdo
+        ArbolBinarioBusqueda<Integer> b = new ArbolBinarioBusqueda<>();
+        b.agregar(5);
+        b.agregar(2);
+        b.agregar(1);
+        b.agregar(3);
+        b.agregar(12);
+        b.agregar(9);
+        b.agregar(7);
+        b.agregar(6);
+        b.agregar(8);
+        b.agregar(8);
+        b.agregar(10);
+        b.agregar(9);
+        b.agregar(11);
+
+        // a.eliminar(8); // que tiene como maxsubizq a 12 y 7 como hijo iz
+
+        System.out.println(b);
+
     }
 
     /**

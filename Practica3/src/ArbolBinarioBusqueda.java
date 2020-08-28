@@ -182,6 +182,18 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             return null;
         }
 
+        // Caso para cuando el nodo si tiene hijo izquierdo
+        if (n.hayIzquierdo()) {
+            // Obtenemos el mayor en el subarbol izquierdo
+            Nodo maxIzq = maximoEnSubarbolIzquierdo(n);
+            n = maxIzq; // Intercambiamos los valores
+
+            // Cambiamos las referencias del hijo izquierdo del nodo maximo
+            if (maxIzq.hayIzquierdo()) {
+                maxIzq.izquierdo.padre = maxIzq.padre;
+                maxIzq.padre.derecho = maxIzq.izquierdo;
+            }
+        }
         return null;
     }
 
