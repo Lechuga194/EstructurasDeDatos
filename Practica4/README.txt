@@ -22,6 +22,7 @@ Arbol binario de busqueda
 
     + Cuando el nodo es la raiz y tiene elementos a la izquierda o derecha
     + Cuando el nodo no tiene hijo izquierdo verificamos si es hijo izq o der y subimos el hijo derecho del nodo
+    + Cuando el nodo no tiene hijo derecho hacemos lo mismo que el anterior pero subiendo el hijo izquierdo
     + Cuando el nodo si tiene hijo izquierdo
         - buscamos el maximo en el subarbol izquierdo
         - Cambiamos los elementos con el nodo a eliminar

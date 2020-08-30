@@ -7,6 +7,30 @@ import java.util.NoSuchElementException;
  */
 public class PruebaArbolOrdenado {
 
+    public static void main(String[] args) {
+
+        double calificacion = 0;
+
+        calificacion += pruebaAgregar();
+        calificacion += pruebaEliminar();
+        calificacion += pruebaContiene();
+        calificacion += pruebaIterador();
+        calificacion += pruebaConstructorIterable();
+        calificacion += pruebaEsVacia();
+        calificacion += pruebaGetTamanio();
+        calificacion += pruebaVaciar();
+        calificacion += pruebaEquals();
+        calificacion += pruebaInOrden();
+        calificacion += pruebaPreOrden();
+        calificacion += pruebaPostOrden();
+        calificacion += pruebaPostOrden();
+        calificacion += pruebaRotacionDerecha();
+        calificacion += pruebaRotacionIzquierda();
+
+        System.out.println("Calificacion: " + calificacion);
+
+    }
+
     /**
      *
      * @return
@@ -302,6 +326,7 @@ public class PruebaArbolOrdenado {
             System.out.println("Resultado:   " + arbol.esVacia());
             if (!arbol.esVacia()) {
                 arbol.eliminar(11);
+                System.out.println("**********************************");
                 System.out.println("Arbol:\n " + arbol);
                 System.out.println("Objetivo:    " + "true");
                 System.out.println("Resultado:   " + arbol.esVacia());
@@ -785,27 +810,4 @@ public class PruebaArbolOrdenado {
         }
     }
 
-    public static void main(String[] args) {
-
-        double calificacion = 0;
-
-        calificacion += pruebaAgregar();
-        calificacion += pruebaEliminar();
-        calificacion += pruebaContiene();
-        calificacion += pruebaIterador();
-        calificacion += pruebaConstructorIterable();
-        calificacion += pruebaEsVacia();
-        calificacion += pruebaGetTamanio();
-        calificacion += pruebaVaciar();
-        calificacion += pruebaEquals();
-        calificacion += pruebaInOrden();
-        calificacion += pruebaPreOrden();
-        calificacion += pruebaPostOrden();
-        calificacion += pruebaPostOrden();
-        calificacion += pruebaRotacionDerecha();
-        calificacion += pruebaRotacionIzquierda();
-
-        System.out.println("Calificacion: " + calificacion);
-
-    }
 }

@@ -165,19 +165,16 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             return n;
         }
 
-        // Cuando un nodo no tiene hijo derecho se sigue
-        // buscando el maximo del subarbol izquierdo
-
         // Caso para cuando el nodo n no tiene hijo derecho
-        // if (!n.hayDerecho()) {
-        // n.izquierdo.padre = n.padre;
-        // if (this.esHijoIzquierdo(n))
-        // n.padre.izquierdo = n.izquierdo;
-        // else
-        // n.padre.derecho = n.izquierdo;
-        // this.tamanio--;
-        // return n;
-        // }
+        if (!n.hayDerecho()) {
+            n.izquierdo.padre = n.padre;
+            if (this.esHijoIzquierdo(n))
+                n.padre.izquierdo = n.izquierdo;
+            else
+                n.padre.derecho = n.izquierdo;
+            this.tamanio--;
+            return n;
+        }
 
         // Caso para cuando el nodo si tiene hijo izquierdo
         if (n.hayIzquierdo()) {
