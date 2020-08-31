@@ -30,7 +30,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
          * @param elemento el elemento del nodo.
          */
         public NodoAVL(T elemento) {
-            // TODO constructor
+            // Aquí va su código.
         }
 
         /**
@@ -39,7 +39,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
          * usarlo, siéntete libre de eliminar esta firma.
          */
         private boolean equals(NodoAVL v, NodoAVL v2) {
-            // TODO equals aux
+            // Aquí va tu código.
         }
 
         /**
@@ -61,7 +61,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
             }
             @SuppressWarnings("unchecked")
             NodoAVL nodo = (NodoAVL) o;
-            // TODO equals
+            // Aquí va su código.
         }
 
         @Override
@@ -80,11 +80,11 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
     }
 
     private void actualizaAltura(NodoAVL v) {
-        // TODO actualizar altura
+        // Aquí va su código.
     }
 
     private void rebalancea(NodoAVL nodo) {
-        // TODO rebalanceo
+        // Aquí va su código.
     }
 
     /**
@@ -97,7 +97,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
      */
     @Override
     public void agregar(T elemento) {
-        // TODO agregar
+        // Aquí va su código.
     }
 
     /**
@@ -109,11 +109,11 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
      */
     @Override
     public void eliminar(T elemento) {
-        // TODO eliminar
+        // Aquí va su código.
     }
 
     private int getAltura(Nodo nodo) {
-        // TODO getAltura
+        // Aquí va su código.
     }
 
     /**

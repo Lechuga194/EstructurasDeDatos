@@ -15,19 +15,21 @@ Arbol binario de busqueda
     + cuando el elemento es mayo o igual al elemento del nodo actual se agrega a la derecha 
     (En ambos casos se usa recursion para llegar al nodo más izquiedo o más derecho segun sea el caso)
 
-*Eliminar nodos tiene seis casos 
+*Eliminar 
     + Cuando el nodo a eliminar es una hoja
         + cuando esta hoja es la raiz solo vaciamos el arbol
         + cuando el nodo es hijo izq o der de otro nodo, solo borramos las referencias al nodo
 
-    + Cuando el nodo es la raiz y tiene elementos a la izquierda o derecha
-    + Cuando el nodo no tiene hijo izquierdo verificamos si es hijo izq o der y subimos el hijo derecho del nodo
-    + Cuando el nodo no tiene hijo derecho hacemos lo mismo que el anterior pero subiendo el hijo izquierdo
+    + Cuando el nodo no tiene hijo izquierdo verificamos si es hijo izq o der y subimos el hijo derecho del nodo. En caso que sea raiz cambiamos la raiz al nodo derecho
+    
     + Cuando el nodo si tiene hijo izquierdo
         - buscamos el maximo en el subarbol izquierdo
         - Cambiamos los elementos con el nodo a eliminar
         - Si el maximo en subarbol tiene izquierdo entonces movemos las referencias
-        - Si no tiene solo eliminamos la referencia de su padre a el
+        - Si no tiene verificamos tres caso
+            -Cuando el padre del maximo no tiene izquierdo
+            -Cuando el maximo es hijo derecho
+            -Cuando el maximo es hijo izquierdo
 
 * BuscaNodo 
     + Si el nodo o el elemento es null regresamos null

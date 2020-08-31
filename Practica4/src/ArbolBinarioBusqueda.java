@@ -131,7 +131,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         // Caso para Hojas
         if (!n.hayIzquierdo() && !n.hayDerecho()) {
             // Caso para arboles de un solo elemento
-            if (n == this.raiz)
+            if (n.equals(raiz))
                 this.vaciar();
             else {
                 if (this.esHijoIzquierdo(n))
@@ -144,49 +144,47 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             return n;
         }
 
-        // Caso para cuando es raiz con elementos a la izquierda o derecha
-        if (n == this.raiz) {
-            if (n.hayIzquierdo())
-                raiz = n.izquierdo;
-            else
-                raiz = n.derecho;
-            this.tamanio--;
-            return n;
-        }
-
         // Caso para cuando el nodo n no tiene hijo izquierdo
         if (!n.hayIzquierdo()) {
-            if (this.esHijoIzquierdo(n))
-                n.padre.izquierdo = n.derecho; // Sabemos que hay derecho por que no es hoja y no hay izquierdo
-            if (this.esHijoDerecho(n))
-                n.padre.derecho = n.derecho;
+            if (!n.equals(raiz)) {
+                if (this.esHijoIzquierdo(n))
+                    n.padre.izquierdo = n.derecho; // Sabemos que hay derecho por que no es hoja y no hay izquierdo
+                if (this.esHijoDerecho(n))
+                    n.padre.derecho = n.derecho;
+            } else {
+                raiz = n.derecho;
+            }
             n.derecho.padre = n.padre;
-            this.tamanio--;
-            return n;
-        }
-
-        // Caso para cuando el nodo n no tiene hijo derecho
-        if (!n.hayDerecho()) {
-            n.izquierdo.padre = n.padre;
-            if (this.esHijoIzquierdo(n))
-                n.padre.izquierdo = n.izquierdo;
-            else
-                n.padre.derecho = n.izquierdo;
             this.tamanio--;
             return n;
         }
 
         // Caso para cuando el nodo si tiene hijo izquierdo
         if (n.hayIzquierdo()) {
+
             // Obtenemos el mayor en el subarbol izquierdo
             Nodo maxIzq = maximoEnSubarbolIzquierdo(n);
             n.elemento = maxIzq.elemento;
 
             if (maxIzq.hayIzquierdo()) {
-                maxIzq.izquierdo.padre = maxIzq.padre;
-                maxIzq.padre.derecho = maxIzq.izquierdo;
-            } else
-                maxIzq.padre.derecho = null;
+                Nodo izqDelMaximo = maxIzq.izquierdo;
+                izqDelMaximo.padre = maxIzq.padre;
+                maxIzq.padre.derecho = izqDelMaximo;
+                maxIzq.izquierdo = null;
+            } else {
+
+                if (!maxIzq.padre.hayIzquierdo()) {
+                    maxIzq.padre.izquierdo = null;
+                    maxIzq.padre.derecho = null;
+                }
+
+                if (this.esHijoDerecho(maxIzq))
+                    maxIzq.padre.derecho = null;
+
+                if (this.esHijoIzquierdo(maxIzq))
+                    maxIzq.padre.izquierdo = null;
+
+            }
 
             this.tamanio--;
             return n;
