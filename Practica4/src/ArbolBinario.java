@@ -32,6 +32,9 @@ public abstract class ArbolBinario<T> implements Coleccionable<T> {
          */
         public Nodo padre, izquierdo, derecho;
 
+        public Nodo() {
+        }
+
         /**
          * Constructor único que recibe un elemento.
          *

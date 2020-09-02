@@ -31,6 +31,8 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
          */
         public NodoAVL(T elemento) {
             // Aquí va su código.
+            super(elemento);
+            this.altura = 0;
         }
 
         /**
@@ -39,7 +41,14 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
          * usarlo, siéntete libre de eliminar esta firma.
          */
         private boolean equals(NodoAVL v, NodoAVL v2) {
-            // Aquí va tu código.
+
+            if (v.hayIzquierdo())
+                return equalsAux(nodoAVL(v.izquierdo), nodoAVL(v2.izquierdo));
+
+            if (v.hayDerecho())
+                return equalsAux(nodoAVL(v.derecho), nodoAVL(v2.derecho));
+
+            return v.elemento == v2.elemento;
         }
 
         /**
@@ -53,21 +62,21 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
          */
         @Override
         public boolean equals(Object o) {
-            if (o == null) {
+            if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            if (getClass() != o.getClass()) {
-                return false;
-            }
+
             @SuppressWarnings("unchecked")
             NodoAVL nodo = (NodoAVL) o;
-            // Aquí va su código.
+            if (this.altura != nodo.altura)
+                return false;
+            return equals(this, nodo);
         }
 
         @Override
         public String toString() {
             String s = super.toString();
-            return s += " alt=" + altura;
+            return s += " [alt => " + altura + "]";
         }
     }
 
@@ -80,11 +89,41 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
     }
 
     private void actualizaAltura(NodoAVL v) {
-        // Aquí va su código.
+        if (v == null)
+            return;
+        int izquierdo = v.hayIzquierdo() ? nodoAVL(v.izquierdo).altura : 0;
+        int derecho = v.hayDerecho() ? nodoAVL(v.derecho).altura : 0;
+        v.altura = Math.max(izquierdo, derecho) + 1;
+
     }
 
     private void rebalancea(NodoAVL nodo) {
-        // Aquí va su código.
+        if (nodo == null)
+            return;
+
+        NodoAVL izq = nodoAVL(nodo.izquierdo);
+        NodoAVL der = nodoAVL(nodo.derecho);
+        int balance = getAltura(izq) - getAltura(der);
+
+        if (balance == 2) {
+            if (getAltura(nodoAVL(izq.izquierdo)) - getAltura(nodoAVL(izq.derecho)) == -1) {
+                rotacionIzquierda(izq);
+                actualizaAltura(izq);
+            }
+            rotacionDerecha(nodo);
+        }
+
+        if (balance == -2) {
+            if (getAltura(nodoAVL(der.izquierdo)) - getAltura(nodoAVL(der.derecho)) == 1) {
+                rotacionDerecha(der);
+                actualizaAltura(der);
+            }
+            rotacionIzquierda(nodo);
+        }
+
+        actualizaAltura(nodo);
+        rebalancea(nodoAVL(nodo.padre));
+
     }
 
     /**
@@ -97,7 +136,9 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
      */
     @Override
     public void agregar(T elemento) {
-        // Aquí va su código.
+        NodoAVL nodo = new NodoAVL(elemento);
+        agregaNodo(raiz, nodo);
+        rebalancea((NodoAVL) nodo);
     }
 
     /**
@@ -109,11 +150,16 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
      */
     @Override
     public void eliminar(T elemento) {
-        // Aquí va su código.
+        NodoAVL nodo = nodoAVL(buscaNodo(raiz, elemento));
+        nodo = (NodoAVL) eliminaNodo(nodo);
+        rebalancea(nodo);
     }
 
     private int getAltura(Nodo nodo) {
-        // Aquí va su código.
+        if (nodo == null)
+            return 0;
+        NodoAVL n = (NodoAVL) nodo;
+        return n.altura;
     }
 
     /**

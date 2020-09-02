@@ -131,7 +131,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         // Caso para Hojas
         if (!n.hayIzquierdo() && !n.hayDerecho()) {
             // Caso para arboles de un solo elemento
-            if (n.equals(raiz))
+            if (n == raiz)
                 this.vaciar();
             else {
                 if (this.esHijoIzquierdo(n))
@@ -146,7 +146,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
 
         // Caso para cuando el nodo n no tiene hijo izquierdo
         if (!n.hayIzquierdo()) {
-            if (!n.equals(raiz)) {
+            if (n != raiz) {
                 if (this.esHijoIzquierdo(n))
                     n.padre.izquierdo = n.derecho; // Sabemos que hay derecho por que no es hoja y no hay izquierdo
                 if (this.esHijoDerecho(n))
@@ -258,14 +258,14 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      */
     protected void rotacionDerecha(Nodo nodo) {
 
-        if (!nodo.hayIzquierdo())
+        if (nodo == null || !nodo.hayIzquierdo())
             return;
 
         Nodo padre = nodo.padre;
         Nodo p = nodo.izquierdo;
         Nodo beta = (p.hayDerecho()) ? p.derecho : null;
 
-        if (nodo.equals(this.raiz)) {
+        if (nodo == raiz) {
             nodo.padre = p;
             raiz = p;
         }
@@ -276,13 +276,16 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         if (esHijoIzquierdo(nodo))
             padre.izquierdo = p;
 
-        p.padre = padre;
+        if (nodo != raiz)
+            nodo.padre = p;
+
         p.derecho = nodo;
-        nodo.padre = p;
+        p.padre = padre;
         if (beta != null) {
             beta.padre = nodo;
             nodo.izquierdo = beta;
-        }
+        } else
+            nodo.izquierdo = null;
     }
 
     /**
@@ -292,14 +295,14 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @param nodo el nodo sobre el que vamos a rotar.
      */
     protected void rotacionIzquierda(Nodo nodo) {
-        if (!nodo.hayDerecho())
+        if (nodo == null || !nodo.hayDerecho())
             return;
 
         Nodo padre = nodo.padre;
         Nodo p = nodo.derecho;
         Nodo beta = (p.hayIzquierdo()) ? p.izquierdo : null;
 
-        if (nodo.equals(this.raiz)) {
+        if (nodo == raiz) {
             nodo.padre = p;
             raiz = p;
         }
@@ -310,13 +313,17 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         if (esHijoIzquierdo(nodo))
             padre.izquierdo = p;
 
-        p.padre = padre;
+        if (nodo != raiz)
+            nodo.padre = p;
+
         p.izquierdo = nodo;
-        nodo.padre = p;
+        p.padre = padre;
         if (beta != null) {
             beta.padre = nodo;
             nodo.derecho = beta;
-        }
+        } else
+            nodo.derecho = null;
+
     }
 
     public void pruebaRotacionIzquierda(T elemento) {
@@ -336,9 +343,9 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @return si es hijo derecho true, false en otro caso
      */
     private boolean esHijoDerecho(Nodo nodo) {
-        if (nodo.padre.derecho == null || nodo == null)
+        if (nodo == raiz || nodo == null || nodo.padre.derecho == null)
             return false;
-        return nodo.padre.derecho.equals(nodo);
+        return nodo.padre.derecho == nodo;
     }
 
     /**
@@ -348,9 +355,9 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @return si es hijo derecho true, false en otro caso
      */
     private boolean esHijoIzquierdo(Nodo nodo) {
-        if (nodo.padre.izquierdo == null || nodo == null)
+        if (nodo == raiz || nodo == null || nodo.padre.izquierdo == null)
             return false;
-        return nodo.padre.izquierdo.equals(nodo);
+        return nodo.padre.izquierdo == nodo;
     }
 
     /**

@@ -3,43 +3,8 @@ Para ejecutar el codigo
 2.- Ejecutar "javac *.java"
 3.- Ejecutar  "java PruebaArbolOrdenado"
 
-Arbol binario
-*Calculo la altura del nodo de forma recursiva, si el nodo es null entonces su altura es 0 en otro caso su altura es el maximo entre sus subarboles izq y der 
-*Para los tres recorridos uso metodos auxiliares que recorren el arbol de manera recursiva segun el tipo de recorrido y en cada iteracion añado el elemento correspondiente a la cola
-*Equals para arboles uso un recorrido postorder
+AVL
 
-Arbol binario de busqueda
-*Agregar nodos tiene tres casos 
-    + cuando el arbol es vacio lo agrega como raiz
-    + cuando el elemento es menor al elemento del nodo actual se agrega a la izquierda
-    + cuando el elemento es mayo o igual al elemento del nodo actual se agrega a la derecha 
-    (En ambos casos se usa recursion para llegar al nodo más izquiedo o más derecho segun sea el caso)
-
-*Eliminar 
-    + Cuando el nodo a eliminar es una hoja
-        + cuando esta hoja es la raiz solo vaciamos el arbol
-        + cuando el nodo es hijo izq o der de otro nodo, solo borramos las referencias al nodo
-
-    + Cuando el nodo no tiene hijo izquierdo verificamos si es hijo izq o der y subimos el hijo derecho del nodo. En caso que sea raiz cambiamos la raiz al nodo derecho
-    
-    + Cuando el nodo si tiene hijo izquierdo
-        - buscamos el maximo en el subarbol izquierdo
-        - Cambiamos los elementos con el nodo a eliminar
-        - Si el maximo en subarbol tiene izquierdo entonces movemos las referencias
-        - Si no tiene verificamos tres caso
-            -Cuando el padre del maximo no tiene izquierdo
-            -Cuando el maximo es hijo derecho
-            -Cuando el maximo es hijo izquierdo
-
-* BuscaNodo 
-    + Si el nodo o el elemento es null regresamos null
-    + Si son iguales regresamos el nodo 
-    + Si es menor buscamos en el subarbol izquierdo 
-    + Si no se encontro entonces buscamos en el subarbol derecho
-
-* Rotaciones Ambas rotaciones funcionan de manera similar 
-    - Guardamos referencias a los nodos que vamos a cambiar 
-    - Si el nodo a girar es la raiz entonces hacemos a p la nueva raiz (p es el nodo izq o derecho de el nodo a girar )
-    - verificamos si es hijo izq o derecho para mover la referencia del padre 
-    - movemos la referencia de los nodos 
-    - si p tiene subarbol izquierdo entonces movemos su referencia 
+*actualizaAltura 
+    aqui verificamos que el nodo no sea nulo, si no lo es guardamos la altura de su hijo izquierdo y derecho (0 en caso de que no existan)
+    y asignamos la altura del nodo  al maximo de estos + 1
