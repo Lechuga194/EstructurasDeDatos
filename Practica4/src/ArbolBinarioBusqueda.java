@@ -131,6 +131,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         // Caso para Hojas
         if (!n.hayIzquierdo() && !n.hayDerecho()) {
             // Caso para arboles de un solo elemento
+            Nodo npadre = n.padre;
             if (n == raiz)
                 this.vaciar();
             else {
@@ -141,7 +142,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
                 n.padre = null;
             }
             this.tamanio--;
-            return n;
+            return npadre;
         }
 
         // Caso para cuando el nodo n no tiene hijo izquierdo

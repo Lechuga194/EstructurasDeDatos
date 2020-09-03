@@ -35,5 +35,16 @@ public class PruebaArbolOrdenado {
         System.out.println(b);
 
         System.out.println("Son los arboles iguales? " + a.raiz.equals(b.raiz));
+
+        System.out.println("---------------------------------");
+        ArbolAVL<String> ejercicio5 = new ArbolAVL<>();
+        ejercicio5.agregar("Mercedes");
+        ejercicio5.agregar("Ferrari");
+        ejercicio5.agregar("Toyota");
+        ejercicio5.agregar("Nissan");
+        ejercicio5.agregar("Audi");
+        ejercicio5.agregar("Ford");
+        System.out.println(ejercicio5);
+
     }
 }

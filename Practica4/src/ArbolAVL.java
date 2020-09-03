@@ -107,17 +107,21 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T> {
 
         if (balance == 2) {
             if (getAltura(nodoAVL(izq.izquierdo)) - getAltura(nodoAVL(izq.derecho)) == -1) {
+                System.out.println("*");
                 rotacionIzquierda(izq);
                 actualizaAltura(izq);
             }
+            System.out.println("*");
             rotacionDerecha(nodo);
         }
 
         if (balance == -2) {
             if (getAltura(nodoAVL(der.izquierdo)) - getAltura(nodoAVL(der.derecho)) == 1) {
+                System.out.println("*");
                 rotacionDerecha(der);
                 actualizaAltura(der);
             }
+            System.out.println("*");
             rotacionIzquierda(nodo);
         }
 
