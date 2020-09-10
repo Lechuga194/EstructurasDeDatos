@@ -1,4 +1,4 @@
-public class PruebaArbolOrdenado {
+public class PruebaAVL {
 
     public static void main(String[] args) {
 
