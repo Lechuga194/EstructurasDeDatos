@@ -9,15 +9,24 @@ public class PruebaHeap {
     public static void main(String[] args) {
 
         double calificacion = 0;
-
-        calificacion += pruebaAgregar();
-        calificacion += pruebaEliminar();
-        calificacion += pruebaContiene();
-        calificacion += pruebaIterador();
-        calificacion += pruebaEsVacia();
-        calificacion += pruebaGetTamanio();
-        calificacion += pruebaEquals();
         System.out.println("Calificacion: " + calificacion);
+
+        MaxHeap<Integer> a = new MaxHeap();
+        a.agregar(26);
+        a.agregar(71);
+        a.agregar(13);
+        a.agregar(2);
+        a.agregar(15);
+        a.agregar(1);
+        a.agregar(8);
+        a.agregar(20);
+        a.agregar(10);
+
+        a.eliminarTope();
+        a.eliminarTope();
+        a.eliminarTope();
+
+        System.out.println(a);
     }
 
     /**
